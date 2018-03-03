@@ -74,6 +74,10 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: landscape
 
+addlink:
+  before_text: hello # text before the post link
+  after_text: bye # text after the post link
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
