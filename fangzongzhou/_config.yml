@@ -77,8 +77,8 @@ pagination_dir: page
 theme: landscape
 
 addlink:
-  before_text: hello # text before the post link
-  after_text: bye # text after the post link
+  before_text: 文章链接 # text before the post link
+  after_text:  # text after the post link
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
