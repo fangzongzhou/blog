@@ -42,7 +42,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace:
 
 # Home page setting
@@ -79,6 +79,8 @@ theme: landscape
 addlink:
   before_text: 文章链接 # text before the post link
   after_text:  # text after the post link
+
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
