@@ -21,7 +21,7 @@ fangzongzhou s005     -                12:33       1 ssh relay
 fangzongzhou s001     -                10:55       - w
 fangzongzhou s012     -                 1:17    1:40 -bash
 ```
-
+<!-- more -->
 ## top
 top命令不仅可以查看当前系统的平均负载，还可以查看不同进程对于CPU、内存等资源的使用情况
 ```

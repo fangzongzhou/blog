@@ -23,7 +23,9 @@ tags:
 <!-- more -->
 ### install
 Ubuntu:
-``` sudo apt-get install git```
+```
+sudo apt-get install git
+```
 
 ### config
 配置用户名及邮箱：
