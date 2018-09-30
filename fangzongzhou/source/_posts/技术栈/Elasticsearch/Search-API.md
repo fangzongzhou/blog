@@ -2,7 +2,10 @@
 title: Search_API
 date: 2018-09-26 13:35:37
 categories:
+- 技术文档
+- Elasticsearch
 tags:
+- Elasticsearch
 ---
 
 让我们通过一些简单的查询来开始.这里是两个进行查询的基本方式；一种是通过[REST request URL](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-uri-request.html)发送查询参数，另一种是通过[https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-request-body.html](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-request-body.html)发送查询参数。request body 的方式允许你通过更有表现力并且更为可读的JSON格式来定义你的查询，我们将会通过一个例子来讲解request URL查询，但在接下来的教程中，我们将仅仅使用request body的方式进行查询。
