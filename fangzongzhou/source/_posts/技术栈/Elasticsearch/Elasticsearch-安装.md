@@ -17,7 +17,7 @@ Elasticsearch提供以下格式的安装包
 [rpm](https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html) | 适用于Red Hat,Centos,OpenSuSE和其他基于RPM的系统
 [msi](https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html) | 适用于Windows 64位操作系统
 [docker](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/docker.html) | 通过镜像运行Elasticsearch容器
-
+<!--more-->
 ### 部署管理工具
 Elasticsearch提供了以下配置管理工具来简化大规模部署
 

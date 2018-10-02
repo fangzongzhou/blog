@@ -20,6 +20,7 @@ Mapping是定义文档和其包含的字段的存储和索引的过程，可以�
 - 支持json分层特性的类型，例如：`object`或`nested`
 - 或是一些专业类型`geo_point`,`geo_shape`或`completion`
 
+<!--more-->
 它在因为各种目的而需要采用不同方式来索引相同的字段时是很有用的。例如，一个string字段在全文查找时应该被作为一个text来进行索引，在排序或聚合时应该作为一个keyword来进行索引。或者，你也可以使用standard analyzer ，english analyzer ，french analyzer来索引一个string字段。
 
 这是multi-fields的目的，多数数据类型通过fields参数支持multi-fields

@@ -18,7 +18,7 @@ Elasticsearch有三个配置文件：
 - `log4j2.properties` 来配置Elasticsearch的日志
 
 这些文件在配置目录下，默认依赖于你的文档分发位置（tar.gz 或zip）或包分发（Debian或RPM包）位置.
-
+<!--more-->
 对于文档分发，配置目录默认在 `$ES_HOME/config` 下。可以通过设置环境变量`ES_PATH_CONF`来进行修改：
 ```
 ES_PATH_CONF=/path/to/my/config ./bin/elasticsearch
