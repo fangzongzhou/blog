@@ -27,6 +27,7 @@ PUT twitter
 
 ### 索引设置
 每个创建的索引可以有一个定义在body中的关联配置：
+<!--more-->
 ```
 PUT twitter
 {

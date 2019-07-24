@@ -9,7 +9,6 @@ tags:
 ---
 Elasticsearch提供以下格式的安装包
 
-
 包类型 | 适用情况
 ---|---
 [zip/tar.gz](https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-targz.html) | 适用于任何操作系统的安装，是最简单的安装方式 
@@ -19,6 +18,7 @@ Elasticsearch提供以下格式的安装包
 [docker](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/docker.html) | 通过镜像运行Elasticsearch容器
 <!--more-->
 ### 部署管理工具
+
 Elasticsearch提供了以下配置管理工具来简化大规模部署
 
 工具 | git地址

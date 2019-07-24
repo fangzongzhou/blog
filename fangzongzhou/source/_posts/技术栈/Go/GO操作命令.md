@@ -2,6 +2,9 @@
 title: GO操作命令
 date: 2018-08-10 22:33:31
 categories:
+- 计算机
+- 文档
+- GO
 tags:
 - GO
 ---
