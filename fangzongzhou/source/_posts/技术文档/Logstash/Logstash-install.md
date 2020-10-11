@@ -36,6 +36,8 @@ sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
 ```
 
+`<!-- more -->`
+
 添加下边内容到你的 /etc/yum.repos.d/ 目录下一个以 `.repo` 为后缀的文件, 例如 `logstash.repo`
 
 ```config

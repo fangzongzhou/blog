@@ -12,13 +12,16 @@ tags:
 
 REST API从_search终端获取数据，这里的例子返回所有bank索引的文档。
 
-```
+```req
 GET /bank/_search?q=*&sort=account_number:asc&pretty
 ```
+
 让我们一起来剖析这个查询的调用.我们在bank索引中查询（_search endpoint）,`q=*`参数标明Elasticsearch匹配索引中的所有文档。`sort=account_number:asc`参数表明使用`account_number` 属性来对文档做升序排列，`pretty`参数同样的是为了告诉Elasticsearch来返回一个美化后的json结果。
 <!--more-->
 结果为(部分展示)：
-```
+
+```json
+
 {
   "took" : 63,
   "timed_out" : false,
@@ -52,6 +55,7 @@ GET /bank/_search?q=*&sort=account_number:asc&pretty
 ```
 
 从结果中，我们看到了以下部分：
+
 - `took`- 以毫秒形式展示的Elasticsearch执行搜索的时间
 - `timed_out` - 告知我们查询是否超时
 - `_shards` - 告知我们查找的分片数，里边包含了成功和失败搜索分片数
@@ -62,7 +66,8 @@ GET /bank/_search?q=*&sort=account_number:asc&pretty
 - `hits._score` 和 `max_score` - 现在忽略这些属性
 
 这里是可以获得同样执行结果的可供替代的request body方法
-```
+
+```req
 GET /bank/_search
 {
   "query": { "match_all": {} },
@@ -72,4 +77,5 @@ GET /bank/_search
 }
 
 ```
+
 一旦获取到查询结果，Elasticsearch的这次请求将完全结束，不会在结果中保留任何形式的服务器端资源或游标，这在Elasticsearch中是非常重要的。这是和其他平台（sql）间一个鲜明的差异，在这类平台上当你初始化获取了部分数据并且你想持续地获取剩余数据时，你可以使用服务器端提供的有状态的游标来完成。

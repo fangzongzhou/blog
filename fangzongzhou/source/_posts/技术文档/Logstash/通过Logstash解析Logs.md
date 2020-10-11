@@ -18,6 +18,8 @@ tags:
 
 在你创建Logstash pipline前,你需要配置Filebeat发送日志到Logstash.  
 
+`<!-- more -->`
+
 [Filebeat](https://github.com/elastic/beats/tree/master/filebeat)客户端是一个轻量的开源工具,它可以完成从你的服务器文件收集日志并将它们转发到你的Logstash实例的过程.专为可靠性和低延迟设计,Filebeat只在主机上占用少量资源,[Beats input](https://www.elastic.co/guide/en/logstash/7.9/plugins-inputs-beats.html) 插件将Logstash 实例资源需求最小化.  
 
 > 典型的使用场景下,Filebeat运行在一个独立于那些运行了logstash实例的机器上,就本教程而言,Logstash实例和Filebeat运行在同一机器上.  
@@ -335,3 +337,142 @@ sudo ./filebeat -e -c filebeat.yml -d "publish"
     }
 ```
 
+## 将数据索引到elasticsearch
+
+现在数据已经被分割成了特定字段,你可以将它们放入Elasticsearch.
+
+Logstash pipline可以将数据索引到Elasticsearch集群中,编辑`first-pipeline.conf`文件并将整个`output`部分替换为以下文本
+
+```conf
+output {
+    elasticsearch {
+        hosts => [ "localhost:9200" ]
+    }
+}
+```
+
+在这个配置中, Logstash 使用http协议连接到 Elasticsearch. 上边的例子假定 Logstash 和 Elasticsearch 运行在同一实例中. 你可以通过主机配置指定 Elasticsearch 实例, 例如 hosts => [ "es-machine:9092" ].
+
+到现在为止, 你的 first-pipeline.conf 文件已经正确配置了 input, filter, 和 output , 它们应该是这个样子的:
+
+```conf
+input {
+    beats {
+        port => "5044"
+    }
+}
+ filter {
+    grok {
+        match => { "message" => "%{COMBINEDAPACHELOG}"}
+    }
+    geoip {
+        source => "clientip"
+    }
+}
+output {
+    elasticsearch {
+        hosts => [ "localhost:9200" ]
+    }
+}
+
+```
+
+保存修改. 像前边一样,为了强制 Filebeat 从头读取日志文件, 关闭 Filebeat (Ctrl+C), 删除注册文件, 使用下边的命令重启:
+
+```bash
+sudo ./filebeat -e -c filebeat.yml -d "publish"
+```
+
+## 测试你的Pipline
+
+现在 Logstash pipeline 已经完成了索引数据到 Elasticsearch 集群的配置, 你可以查询 Elasticsearch.
+
+基于 grok filter 插件创建的字段,尝试在Elasticsearch中进行查询. 使用 YYYY.MM.DD 格式的当前日期替换 $DATE :
+
+```req
+curl -XGET 'localhost:9200/logstash-$DATE/_search?pretty&q=response=200'
+```
+
+> 如果想列出es索引, 可以使用: curl 'localhost:9200/_cat/indices?v'.
+
+你可以得到数据响应:
+
+```json
+{
+  "took": 50,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 98,
+    "max_score": 2.793642,
+    "hits": [
+      {
+        "_index": "logstash-2017.11.09",
+        "_type": "doc",
+        "_id": "3IzDnl8BW52sR0fx5wdV",
+        "_score": 2.793642,
+        "_source": {
+          "request": "/presentations/logstash-monitorama-2013/images/frontend-response-codes.png",
+          "agent": """"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36"""",
+          "geoip": {
+            "timezone": "Europe/Moscow",
+            "ip": "83.149.9.216",
+            "latitude": 55.7485,
+            "continent_code": "EU",
+            "city_name": "Moscow",
+            "country_name": "Russia",
+            "country_code2": "RU",
+            "country_code3": "RU",
+            "region_name": "Moscow",
+            "location": {
+              "lon": 37.6184,
+              "lat": 55.7485
+            },
+            "postal_code": "101194",
+            "region_code": "MOW",
+            "longitude": 37.6184
+          },
+          "offset": 2932,
+          "auth": "-",
+          "ident": "-",
+          "verb": "GET",
+          "prospector": {
+            "type": "log"
+          },
+          "input": {
+            "type": "log"
+          },
+          "source": "/path/to/file/logstash-tutorial.log",
+          "message": """83.149.9.216 - - [04/Jan/2015:05:13:45 +0000] "GET /presentations/logstash-monitorama-2013/images/frontend-response-codes.png HTTP/1.1" 200 52878 "http://semicomplete.com/presentations/logstash-monitorama-2013/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36"""",
+          "tags": [
+            "beats_input_codec_plain_applied"
+          ],
+          "referrer": """"http://semicomplete.com/presentations/logstash-monitorama-2013/"""",
+          "@timestamp": "2017-11-09T03:11:35.304Z",
+          "response": "200",
+          "bytes": "52878",
+          "clientip": "83.149.9.216",
+          "@version": "1",
+          "beat": {
+            "name": "My-MacBook-Pro.local",
+            "hostname": "My-MacBook-Pro.local",
+            "version": "6.0.0"
+          },
+          "host": "My-MacBook-Pro.local",
+          "httpversion": "1.1",
+          "timestamp": "04/Jan/2015:05:13:45 +0000"
+        }
+      },
+```
+
+如果使用Kibana可视化数据,还可以在 Kibana中浏览Filebeat数据:
+![kibana-filebeat-data](https://www.elastic.co/guide/en/logstash/current/static/images/kibana-filebeat-data.png)
+
+参见[Filebeat 快速入门文档](https://www.elastic.co/guide/en/beats/filebeat/7.9/filebeat-installation-configuration.html) 了解有关加载Filebeat的Kibana索引模式的信息.
+
+您已经成功地创建了一个pipline,使用Filebeat将 apache web日志作为输入,解析这些日志以从日志中创建特定的命名字段,并将解析后的数据写入Elasticsearch集群.接下来,您将学习如何创建一个使用多个输入和输出的pipline.
