@@ -8,6 +8,7 @@ tags:
 - 翻译
 ---
 ## 什么是MySQL
+
 MySQL,是Oracle公司开发、推广、支持的开源SQL数据管理系统。
 
 [官网地址](http://www.mysql.com)

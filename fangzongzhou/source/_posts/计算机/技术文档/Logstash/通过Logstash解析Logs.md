@@ -7,6 +7,7 @@ categories:
 tags:
 - Logstash
 ---
+[原文链接](https://www.elastic.co/guide/en/logstash/current/advanced-pipeline.html#configuring-geoip-plugin)
 
 上一节中,通过创建一个基本的Logstash pipline测试你的Logstash安装成功.在真实场景中,一个Logstash往往更复杂些,典型的Logstash pipline往往有一个或多个input,filter,和output插件.&nbsp;&nbsp;
 
@@ -18,10 +19,9 @@ tags:
 
 在你创建Logstash pipline前,你需要配置Filebeat发送日志到Logstash.  
 
-`<!-- more -->`
-
 [Filebeat](https://github.com/elastic/beats/tree/master/filebeat)客户端是一个轻量的开源工具,它可以完成从你的服务器文件收集日志并将它们转发到你的Logstash实例的过程.专为可靠性和低延迟设计,Filebeat只在主机上占用少量资源,[Beats input](https://www.elastic.co/guide/en/logstash/7.9/plugins-inputs-beats.html) 插件将Logstash 实例资源需求最小化.  
 
+<!-- more -->
 > 典型的使用场景下,Filebeat运行在一个独立于那些运行了logstash实例的机器上,就本教程而言,Logstash实例和Filebeat运行在同一机器上.  
 
 Logstash默认安装时包含了[Beats input](https://www.elastic.co/guide/en/logstash/7.9/plugins-inputs-beats.html)插件,Beats input使得Logstash可以接收Elastic Beats框架的事件,这意味着任何Beats框架编写的beat(例如Packetbeat 和 Metricbeat)都可以发送数据到Logstash  

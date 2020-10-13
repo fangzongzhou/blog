@@ -9,7 +9,6 @@ tags:
 ---
 [原文](https://dev.mysql.com/doc/refman/8.0/en/innodb-deadlocks.html)
 
-
 [TOC]
 
 死锁是两个不同的事务无法进行的一种情况，因为它们互相持有另一方需要的锁，它们都等待资源可用，但却没有任何一方主动释放自己持有的锁。
@@ -21,11 +20,14 @@ tags:
 
 当死锁监测开启（默认）并有死锁发生时，InnoDB会察觉到并回滚其中的一个事务（被死锁影响的事务）。如果通过 `innodb_deadlock_detect` 配置项禁用死锁监测，在死锁发生时，InnoDB依赖` innodb_lock_wait_timeout `设置来回滚事务。所以，即使你的应用逻辑是正确的，在事务重试时你也必须对这种情况做处理。在InnoDB中可以使用` SHOW ENGINE INNODB STATUS `查看最后的死锁。如果死锁经常发生影响事务结构和应用，可以通过 ` innodb_print_all_deadlocks ` 开启配置将所有死锁日志打印出来。更多关于死锁的发生和处理可参见：[Section 15.5.5.2, “Deadlock Detection and Rollback”](https://dev.mysql.com/doc/refman/8.0/en/innodb-deadlock-detection.html)
 
+<!--more-->
 ### 15.5.5.1 一个死锁的例子
+
 下边的例子展示了当请求锁导致死锁时发生的错误。这个例子需要两个客户端，A和B。
 
 首先，客户端A创建一个表，这个表包含一行数据，此时开启一个事务。通过这个事务，A在share模式下通过select获取一个S锁。
-```
+
+```bash
 mysql> CREATE TABLE t (i INT) ENGINE = InnoDB;
 Query OK, 0 rows affected (1.07 sec)
 
@@ -44,23 +46,27 @@ mysql> SELECT * FROM t WHERE i = 1 FOR SHARE;
 ```
 
 然后客户端B开启一个事务，并尝试从该表中删除这行数据。
-```
+
+```bash
 mysql> START TRANSACTION;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> DELETE FROM t WHERE i = 1;
 ```
+
 这个删除操作会请求一个X锁。这个锁因为和A持有的S锁冲突而无法获取到，这个请求会被加到该行的锁请求队列中，并且B会被阻塞住。
 
 最后A也尝试从表中删除该数据
-```
+
+```bash
 mysql> DELETE FROM t WHERE i = 1;
 ERROR 1213 (40001): Deadlock found when trying to get lock;
 try restarting transaction
 ```
 
 此时死锁就会发生，因为A需要X去删除该数据，这个锁请求因为X被B占用而无法获取到，此时B也在等待着A去释放S，而A因为请求X而无法获取到所以也无法释放S。结果，InnoDB在某个客户端产生了错误并回滚了该事务
-```
+
+```bash
 ERROR 1213 (40001): Deadlock found when trying to get lock;
 try restarting transaction
 ```
