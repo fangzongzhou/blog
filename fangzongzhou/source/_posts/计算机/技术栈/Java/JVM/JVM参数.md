@@ -91,8 +91,6 @@ JVM启动时分配的用于专门存类元数据class部分的内存大小.默�
 
 ### MetaspaceSize
 
-
-
 ### MaxMetaspaceSize
 
 ## Perm
@@ -143,3 +141,7 @@ GC发生的时候会将Eden和From Space里的可达对象往To Space里拷贝�
 ## 类加载/卸载
 
 `-XX:+TraceClassLoading` 可以显示类加载信息,`-XX:+TraceClassUnloading` 显示类卸载信息
+
+## -XX:MaxTenuringThreshold
+
+设置晋升到老年代所需要的GC次数
