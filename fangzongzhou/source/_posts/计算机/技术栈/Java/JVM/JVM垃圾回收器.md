@@ -1,7 +1,7 @@
 ---
 title: JVM垃圾回收器
 categories:
-  - JAVA
+  - Java
   - JVM
 tags:
   - JVM

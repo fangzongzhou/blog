@@ -2,7 +2,7 @@
 title: synchronized
 date: 2020-10-13 23:39:35
 categories:
-- java
+- Java
 - 并发编程
 tags:
 ---

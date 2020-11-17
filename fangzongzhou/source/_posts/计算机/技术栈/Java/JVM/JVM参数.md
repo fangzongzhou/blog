@@ -1,7 +1,7 @@
 ---
 title: JVM参数
 categories:
-  - JAVA
+  - Java
   - JVM
 tags:
   - JVM

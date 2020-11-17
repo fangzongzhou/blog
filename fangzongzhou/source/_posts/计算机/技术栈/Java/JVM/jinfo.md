@@ -1,7 +1,7 @@
 ---
 title: jinfo
 categories:
-  - JAVA
+  - Java
   - JVM
 tags:
   - JVM

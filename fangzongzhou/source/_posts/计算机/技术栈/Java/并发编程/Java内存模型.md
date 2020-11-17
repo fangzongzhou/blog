@@ -2,7 +2,7 @@
 title: Java内存模型
 date: 2020-10-15 22:06:20
 categories:
-- java
+- Java
 - 并发编程
 tags:
 ---

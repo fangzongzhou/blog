@@ -1,7 +1,7 @@
 ---
 title: jcmd
 categories:
-  - JAVA
+  - Java
   - JVM
 tags:
   - JVM

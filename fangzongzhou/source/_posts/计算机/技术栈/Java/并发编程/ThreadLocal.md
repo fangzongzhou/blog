@@ -2,7 +2,7 @@
 title: ThreadLocal
 date: 2020-10-28 22:39:37
 categories:
-- java
+- Java
 - 并发编程
 tags:
 ---

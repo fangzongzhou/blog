@@ -1,7 +1,7 @@
 ---
 title: JVM内存结构
 categories:
-  - JAVA
+  - Java
   - JVM
 tags:
   - JVM

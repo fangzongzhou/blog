@@ -2,7 +2,7 @@
 title: volatile
 date: 2020-10-13 23:12:58
 categories:
-- java
+- Java
 - 并发编程
 tags:
 ---

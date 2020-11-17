@@ -2,7 +2,7 @@
 title: Java内存屏障
 date: 2020-10-16 09:52:32
 categories:
-- java
+- Java
 - 并发编程
 tags:
 ---

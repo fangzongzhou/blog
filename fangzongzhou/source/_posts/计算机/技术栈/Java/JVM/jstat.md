@@ -1,7 +1,7 @@
 ---
 title: jstat
 categories:
-  - JAVA
+  - Java
   - JVM
 tags:
   - JVM

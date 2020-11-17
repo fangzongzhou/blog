@@ -1,7 +1,7 @@
 ---
 title: JVM类加载机制
 categories:
-  - JAVA
+  - Java
   - JVM
 tags:
   - JVM
