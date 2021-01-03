@@ -1,9 +1,9 @@
 ---
 title: 排他网关MECE检查
 categories:
-  - 流程检查
+  - BPMN
 tags:
-  - 测试
+  - 有效性验证
 date: 2020-11-06 14:39:14
 ---
 
