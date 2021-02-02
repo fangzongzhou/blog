@@ -3,8 +3,6 @@ title: Process-过程
 categories:
   - BPMN
   - Process
-tags:
-  - BPMN
 date: 2020-12-09 11:50:16
 ---
 

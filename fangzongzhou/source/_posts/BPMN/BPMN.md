@@ -2,8 +2,6 @@
 title: BPMN
 categories:
   - BPMN
-tags:
-  - BPMN
 date: 2020-12-07 11:57:42
 ---
 

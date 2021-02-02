@@ -3,8 +3,6 @@ title: Activities
 categories:
   - BPMN
   - Process
-tags:
-  - BPMN
 date: 2020-12-09 18:00:38
 ---
 Activity 是在业务流程中执行的工作. 可以是原子的,也可以是非原子(复合)的. 作为 Process 一部分的活动类型有: Task ,Sub-Process 和 Call Activity,它们允许在图中包含可复用的任务和流程. 然而,Process 不是一个特定的图形对象. 它是一组图形对象,下面将重点介绍 **Sub-Process** 和 **Task** 两种图形对象

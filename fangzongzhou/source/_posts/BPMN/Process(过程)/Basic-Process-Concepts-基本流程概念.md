@@ -3,8 +3,6 @@ title: Basic Process Concepts(基本流程概念)
 categories:
   - BPMN
   - Process
-tags:
-  - BPMN
 date: 2020-12-09 16:44:15
 ---
 

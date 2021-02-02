@@ -3,7 +3,6 @@ title: PDCA
 categories:
   - 质量管理
 tags:
-  - 质量管理
   - 方法
 date: 2020-12-07 15:02:52
 ---

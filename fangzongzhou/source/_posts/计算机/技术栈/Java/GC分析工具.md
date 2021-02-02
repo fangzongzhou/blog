@@ -1,9 +1,10 @@
 ---
 title: GC分析工具
 categories:
-  - 未分类
+  - Java
+  - JVM
 tags:
-  - 随笔
+  - Java
 date: 2020-11-13 10:00:53
 ---
 
