@@ -138,7 +138,7 @@ GET /bank/_search
 
 ---
 
-相比之下，这个例子中有两个`match `它的查询结果返回address中包含'mill'或‘lane’的accounts
+相比之下，这个例子中有两个 `match` 它的查询结果返回address中包含'mill'或‘lane’的accounts
 
 ```dsl
 GET /bank/_search
@@ -173,12 +173,14 @@ GET /bank/_search
   }
 }
 ```
+
 上例中`bool must_not` 从句声明的一系列查询必须没有任何一个为true才能被认为匹配。
 
 我们可以同时在bool query中组合`must`,`should`和`must_not`从句，而且，我们可以在这些`bool`从句中组合这些bool查询来实现任何复杂的多层级bool逻辑
 
-这个例子返回所有40岁并且不生活在ID的所有账号。
-```
+这个例子返回所有40岁并且不生活在ID的所有账号
+
+```dsl
 GET /bank/_search
 {
   "query": {
